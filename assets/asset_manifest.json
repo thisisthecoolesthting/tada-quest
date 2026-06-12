@@ -1,0 +1,40 @@
+{
+  "name": "Tada Quest starter media assets",
+  "license_note": "Original placeholder assets generated for this project. Verify brand/name rights before publishing.",
+  "svg_missions": [
+    "assets/svg/missions/paper_flower.svg",
+    "assets/svg/missions/rubber_pencil.svg",
+    "assets/svg/missions/shadow_rabbit.svg",
+    "assets/svg/missions/crayon_mind_reader.svg",
+    "assets/svg/missions/pepper_escape.svg",
+    "assets/svg/missions/jumping_clips.svg",
+    "assets/svg/missions/salt_vanish.svg",
+    "assets/svg/missions/number_wizard.svg",
+    "assets/svg/missions/coin_portal.svg",
+    "assets/svg/missions/rising_ring.svg",
+    "assets/svg/missions/static_can.svg",
+    "assets/svg/missions/prediction_star.svg"
+  ],
+  "svg_brand": [
+    "assets/svg/brand/logo_tada_quest.svg"
+  ],
+  "svg_characters": [
+    "assets/svg/characters/mascot_spark_owl.svg"
+  ],
+  "svg_ui": [
+    "assets/svg/ui/star_badge.svg",
+    "assets/svg/ui/safety_badge.svg",
+    "assets/svg/ui/parent_lock.svg",
+    "assets/svg/ui/next_arrow.svg",
+    "assets/svg/ui/home_button.svg"
+  ],
+  "png_play_store": [
+    "assets/png/play_store/icon_512.png",
+    "assets/png/play_store/feature_graphic_1024x500.png"
+  ],
+  "png_mockups": [
+    "assets/png/mockups/screenshot_home_1080x1920.png",
+    "assets/png/mockups/screenshot_mission_1080x1920.png",
+    "assets/png/mockups/screenshot_badges_1080x1920.png"
+  ]
+}

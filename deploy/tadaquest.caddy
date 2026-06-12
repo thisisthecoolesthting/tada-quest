@@ -1,0 +1,28 @@
+# Tada Quest — static site Caddy block.
+# This serves files directly (file_server), so it needs NO PM2 process and NO
+# port, unlike the Next.js storefronts on this box. Drop-in: append this block
+# to /etc/caddy/Caddyfile (or place at /etc/caddy/Caddyfile.d/tadaquest.caddy
+# if/when per-domain fragments are enabled).
+#
+# Replace the domain with the one you register. Caddy will auto-provision TLS.
+# The privacy URL that Google Play needs becomes: https://<domain>/privacy.html
+
+tadaquest.app, www.tadaquest.app {
+    encode gzip zstd
+    root * /var/www/tadaquest
+    file_server
+
+    # Tidy URLs: /privacy -> /privacy.html
+    try_files {path} {path}.html {path}/ =404
+
+    # Light security headers (no tracking, no cookies set by the site)
+    header {
+        X-Content-Type-Options nosniff
+        Referrer-Policy no-referrer
+        -Server
+    }
+
+    log {
+        output file /var/log/caddy/tadaquest.log
+    }
+}

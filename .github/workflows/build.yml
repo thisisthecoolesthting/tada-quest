@@ -1,0 +1,72 @@
+name: Build Android (APK + AAB)
+
+# Builds the Flutter app in the cloud — no local Android/Flutter SDK needed.
+# Produces a debug APK (sideload to test) and a release AAB (for Google Play).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app_flutter
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Generate native host project (android/, web/)
+        run: flutter create . --platforms=android,web --org com.tadaquest --project-name tada_quest
+
+      - name: Strip ALL permissions from manifest (offline kids app)
+        run: |
+          MAN=android/app/src/main/AndroidManifest.xml
+          # Remove any <uses-permission .../> lines Flutter added (e.g. INTERNET in debug)
+          sed -i '/<uses-permission/d' "$MAN"
+          echo "----- manifest after strip -----"
+          cat "$MAN"
+          if grep -q "uses-permission" "$MAN"; then
+            echo "ERROR: a permission survived the strip"; exit 1
+          fi
+
+      - name: Get packages
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze || true
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Build debug APK
+        run: flutter build apk --debug
+
+      - name: Build release AAB (unsigned)
+        run: flutter build appbundle --release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: tada-quest-debug-apk
+          path: app_flutter/build/app/outputs/flutter-apk/app-debug.apk
+          if-no-files-found: error
+
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: tada-quest-release-aab
+          path: app_flutter/build/app/outputs/bundle/release/app-release.aab
+          if-no-files-found: error

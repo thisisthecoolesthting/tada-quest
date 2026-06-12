@@ -1,0 +1,614 @@
+{
+  "appName": "Tada Quest",
+  "tagline": "Safe home magic missions for kids",
+  "recommendedAgeGroups": [
+    "6-8",
+    "9-12"
+  ],
+  "secondaryUse": "Ages 4-6 can use selected starter missions with a grown-up.",
+  "privacyStance": "No login, no ads, no analytics, no child profiles, no open text fields, no camera, no microphone, no location.",
+  "missions": [
+    {
+      "id": "paper_flower",
+      "number": 1,
+      "title": "The Flower That Wakes Up",
+      "subtitle": "A paper flower opens by itself on water.",
+      "ageBands": [
+        "4-6 with grown-up",
+        "6-8",
+        "9-12"
+      ],
+      "timeMinutes": 5,
+      "messLevel": "low-water",
+      "skill": "starter",
+      "needsAdult": true,
+      "items": [
+        "paper",
+        "crayons or markers",
+        "shallow plate",
+        "water",
+        "scissors for grown-up prep"
+      ],
+      "safety": [
+        "A grown-up cuts the paper flower for younger kids.",
+        "Keep water on a towel or tray.",
+        "Do not drink craft water."
+      ],
+      "effect": "A folded paper flower slowly opens like magic when it touches water.",
+      "steps": [
+        "Draw a simple flower on paper.",
+        "Cut it out. Younger kids ask a grown-up to cut.",
+        "Fold each petal toward the center.",
+        "Place the folded flower gently on water.",
+        "Say your magic word and watch it open."
+      ],
+      "secret": "Paper fibers soak up water and relax, which makes the folded petals open.",
+      "showTip": "Tell the audience the flower is sleeping. Tap the water and say, 'Wake up, tiny flower!'",
+      "questions": {
+        "before": [
+          "Do you have paper and a shallow plate of water?",
+          "Is a grown-up helping with scissors?",
+          "Did you put a towel under the plate?"
+        ],
+        "during": [
+          "What color is your magic flower?",
+          "What magic word will wake it up?",
+          "Ready to place it on the water gently?"
+        ],
+        "after": [
+          "Did the flower open?",
+          "Was it slow, medium, or fast?",
+          "Want to try a bigger or smaller flower?"
+        ]
+      },
+      "asset": "assets/svg/missions/paper_flower.svg",
+      "badge": "Bloom Badge"
+    },
+    {
+      "id": "rubber_pencil",
+      "number": 2,
+      "title": "The Bendy Pencil",
+      "subtitle": "Make a pencil look rubbery without bending it.",
+      "ageBands": [
+        "4-6 with grown-up",
+        "6-8",
+        "9-12"
+      ],
+      "timeMinutes": 3,
+      "messLevel": "none",
+      "skill": "starter",
+      "needsAdult": false,
+      "items": [
+        "pencil or crayon"
+      ],
+      "safety": [
+        "Hold the pencil away from faces.",
+        "Do not poke people or pets."
+      ],
+      "effect": "A straight pencil looks like it bends and wiggles.",
+      "steps": [
+        "Hold the pencil lightly near one end.",
+        "Keep your hand loose.",
+        "Move your hand up and down in small fast motions.",
+        "Show it from the side so it looks bendy.",
+        "Stop and let everyone see the pencil is still straight."
+      ],
+      "secret": "Your eyes blend the fast motion into a bendy shape.",
+      "showTip": "Say, 'This pencil is tired of being straight!' Then wiggle it for only a few seconds.",
+      "questions": {
+        "before": [
+          "Do you have a pencil or crayon?",
+          "Can you stand where everyone sees the side?"
+        ],
+        "during": [
+          "Are you holding it loosely?",
+          "Can you wiggle smaller and faster?"
+        ],
+        "after": [
+          "Did it look bendy?",
+          "Was your hand relaxed?",
+          "Try again with a crayon?"
+        ]
+      },
+      "asset": "assets/svg/missions/rubber_pencil.svg",
+      "badge": "Wiggle Badge"
+    },
+    {
+      "id": "shadow_rabbit",
+      "number": 3,
+      "title": "The Shadow Rabbit",
+      "subtitle": "Turn your hands into a wall shadow animal.",
+      "ageBands": [
+        "4-6 with grown-up",
+        "6-8",
+        "9-12"
+      ],
+      "timeMinutes": 4,
+      "messLevel": "none",
+      "skill": "starter",
+      "needsAdult": true,
+      "items": [
+        "wall",
+        "lamp or phone flashlight",
+        "hands"
+      ],
+      "safety": [
+        "A grown-up handles the lamp or phone flashlight for younger kids.",
+        "Do not shine light into eyes."
+      ],
+      "effect": "Your hands create a rabbit shadow that appears on the wall.",
+      "steps": [
+        "Point a light at a blank wall.",
+        "Put your hands between the light and wall.",
+        "Cross your thumbs to make a head shape.",
+        "Raise two fingers for ears.",
+        "Move one finger to make the rabbit twitch."
+      ],
+      "secret": "Objects block light. Your hands make the shape that appears on the wall.",
+      "showTip": "Tell a tiny story: 'A rabbit jumped into the room but only brought its shadow.'",
+      "questions": {
+        "before": [
+          "Is the light pointed at the wall, not eyes?",
+          "Can you see your hand shadow?"
+        ],
+        "during": [
+          "Can you make two ears?",
+          "Can the rabbit wave?"
+        ],
+        "after": [
+          "Did your shadow look like a rabbit?",
+          "Want to invent another animal?"
+        ]
+      },
+      "asset": "assets/svg/missions/shadow_rabbit.svg",
+      "badge": "Shadow Badge"
+    },
+    {
+      "id": "crayon_mind_reader",
+      "number": 4,
+      "title": "Crayon Mind Reader",
+      "subtitle": "Guess a crayon color with a secret peek.",
+      "ageBands": [
+        "6-8",
+        "9-12"
+      ],
+      "timeMinutes": 5,
+      "messLevel": "none",
+      "skill": "easy",
+      "needsAdult": false,
+      "items": [
+        "3 to 8 crayons"
+      ],
+      "safety": [
+        "Do not put crayons near mouths or noses.",
+        "Keep crayons off walls and furniture."
+      ],
+      "effect": "A spectator secretly chooses a crayon, and you correctly name the color.",
+      "steps": [
+        "Turn your back and ask someone to place one crayon in your hand.",
+        "Hold the crayon behind your back.",
+        "Lightly scrape a tiny bit of color onto your thumbnail.",
+        "Return the crayon behind your back and turn around.",
+        "Pretend to think, glance at your thumbnail, and name the color."
+      ],
+      "secret": "The color mark on your thumbnail tells you the answer.",
+      "showTip": "Do not look too quickly. Ask, 'Are you thinking of the color very loudly?' then reveal it.",
+      "questions": {
+        "before": [
+          "Do you have crayons?",
+          "Can you keep the secret scrape tiny?"
+        ],
+        "during": [
+          "Did you keep the crayon behind your back?",
+          "Can you glance without making it obvious?"
+        ],
+        "after": [
+          "Did you guess the color?",
+          "Did anyone spot the secret?",
+          "Practice again with fewer crayons?"
+        ]
+      },
+      "asset": "assets/svg/missions/crayon_mind_reader.svg",
+      "badge": "Mind Reader Badge"
+    },
+    {
+      "id": "pepper_escape",
+      "number": 5,
+      "title": "Pepper Runs Away",
+      "subtitle": "Make pepper scatter with one soapy touch.",
+      "ageBands": [
+        "6-8 with grown-up",
+        "9-12"
+      ],
+      "timeMinutes": 5,
+      "messLevel": "low-water",
+      "skill": "easy",
+      "needsAdult": true,
+      "items": [
+        "plate or shallow bowl",
+        "water",
+        "ground pepper",
+        "dish soap",
+        "cotton swab or fingertip"
+      ],
+      "safety": [
+        "Use only a tiny bit of soap.",
+        "Do not touch eyes after touching soap or pepper.",
+        "Wash hands after the trick.",
+        "Keep the plate on a towel."
+      ],
+      "effect": "Pepper floating on water zooms away when the magic finger touches the center.",
+      "steps": [
+        "Pour a little water into a plate.",
+        "Sprinkle pepper across the water.",
+        "Put a tiny dot of dish soap on a cotton swab or fingertip.",
+        "Touch the center of the water.",
+        "Watch the pepper race away."
+      ],
+      "secret": "Soap changes the water surface and pushes the pepper outward.",
+      "showTip": "Say, 'Pepper, make a circle!' Touch the water only once for a clean surprise.",
+      "questions": {
+        "before": [
+          "Is a grown-up nearby?",
+          "Do you have a towel under the plate?",
+          "Did you use only a tiny dot of soap?"
+        ],
+        "during": [
+          "Is the pepper floating?",
+          "Ready to touch the center once?"
+        ],
+        "after": [
+          "Did the pepper run away?",
+          "What happened when you touched the water?",
+          "Wash hands now?"
+        ]
+      },
+      "asset": "assets/svg/missions/pepper_escape.svg",
+      "badge": "Pepper Pop Badge"
+    },
+    {
+      "id": "jumping_clips",
+      "number": 6,
+      "title": "Jumping Paper Clips",
+      "subtitle": "Two clips jump and link when paper is pulled.",
+      "ageBands": [
+        "6-8 with grown-up",
+        "9-12"
+      ],
+      "timeMinutes": 6,
+      "messLevel": "none",
+      "skill": "easy",
+      "needsAdult": true,
+      "items": [
+        "long strip of paper or dollar bill",
+        "2 paper clips"
+      ],
+      "safety": [
+        "Paper clips are small. Keep them away from mouths and younger siblings.",
+        "Use a paper strip instead of money if preferred."
+      ],
+      "effect": "Two paper clips jump off the paper and link together.",
+      "steps": [
+        "Fold the paper strip into an S shape with three panels.",
+        "Clip the first two layers together near one side.",
+        "Clip the last two layers together near the other side.",
+        "Hold both ends of the paper.",
+        "Pull the ends apart quickly and the clips jump together."
+      ],
+      "secret": "The folds line the clips up so pulling the paper forces them to snap together.",
+      "showTip": "Count down: 'Three, two, one—jump!' Pull cleanly and let the clips land on the table.",
+      "questions": {
+        "before": [
+          "Do you have two paper clips?",
+          "Are small objects away from little kids?",
+          "Did you fold the paper into three panels?"
+        ],
+        "during": [
+          "Are the clips on different sides of the fold?",
+          "Ready to pull both ends?"
+        ],
+        "after": [
+          "Did the clips jump?",
+          "Did they link together?",
+          "Want the slow setup hint?"
+        ]
+      },
+      "asset": "assets/svg/missions/jumping_clips.svg",
+      "badge": "Jump Badge"
+    },
+    {
+      "id": "salt_vanish",
+      "number": 7,
+      "title": "Invisible Salt",
+      "subtitle": "Make a pinch of salt disappear from a napkin.",
+      "ageBands": [
+        "6-8 with grown-up",
+        "9-12"
+      ],
+      "timeMinutes": 6,
+      "messLevel": "tiny-mess",
+      "skill": "easy",
+      "needsAdult": true,
+      "items": [
+        "napkin",
+        "small pinch of salt",
+        "table"
+      ],
+      "safety": [
+        "Use only a tiny pinch of salt.",
+        "Do not eat salt from the trick.",
+        "Wipe the table after."
+      ],
+      "effect": "Salt seems to vanish after being wrapped in a napkin.",
+      "steps": [
+        "Place a tiny pinch of salt in the center of a napkin.",
+        "Fold the napkin once, secretly letting the salt slide into a corner pocket.",
+        "Pretend the salt is in the middle.",
+        "Tap the middle and say the magic word.",
+        "Open the middle to show it empty, keeping the hidden corner folded."
+      ],
+      "secret": "The salt is hidden in a folded corner, not in the center where the audience looks.",
+      "showTip": "Keep the napkin moving naturally. Do not over-explain where the salt is.",
+      "questions": {
+        "before": [
+          "Do you have a napkin and tiny pinch of salt?",
+          "Is the table dry?"
+        ],
+        "during": [
+          "Did the salt slide into the secret corner?",
+          "Can you keep that corner folded?"
+        ],
+        "after": [
+          "Did the middle look empty?",
+          "Did salt spill?",
+          "Need cleanup?"
+        ]
+      },
+      "asset": "assets/svg/missions/salt_vanish.svg",
+      "badge": "Vanish Badge"
+    },
+    {
+      "id": "number_wizard",
+      "number": 8,
+      "title": "The Number 9 Spell",
+      "subtitle": "A math trick that always finds 9.",
+      "ageBands": [
+        "6-8",
+        "9-12"
+      ],
+      "timeMinutes": 4,
+      "messLevel": "none",
+      "skill": "easy",
+      "needsAdult": false,
+      "items": [
+        "no props"
+      ],
+      "safety": [
+        "No physical materials needed."
+      ],
+      "effect": "Someone picks a number, but the answer always becomes 9.",
+      "steps": [
+        "Ask someone to pick a number from 1 to 9.",
+        "Tell them to multiply it by 9.",
+        "If the answer has two digits, add those digits together.",
+        "Tell them to think of the final number.",
+        "Reveal: 'Your number is 9!'"
+      ],
+      "secret": "Multiples of 9 from 9 to 81 have digits that add to 9.",
+      "showTip": "Write a big hidden 9 on paper before the trick, then reveal your prediction.",
+      "questions": {
+        "before": [
+          "Does your helper know multiplication by 9?",
+          "Want to use paper for the math?"
+        ],
+        "during": [
+          "Did your helper multiply by 9?",
+          "Did they add the digits?"
+        ],
+        "after": [
+          "Was the final number 9?",
+          "Want to learn why it works?"
+        ]
+      },
+      "asset": "assets/svg/missions/number_wizard.svg",
+      "badge": "Number Badge"
+    },
+    {
+      "id": "coin_portal",
+      "number": 9,
+      "title": "Coin Portal Cup",
+      "subtitle": "A coin seems to appear under a cup.",
+      "ageBands": [
+        "9-12"
+      ],
+      "timeMinutes": 8,
+      "messLevel": "none",
+      "skill": "medium",
+      "needsAdult": true,
+      "items": [
+        "paper cup",
+        "coin",
+        "paper matching the table or a second coin cover",
+        "tape optional"
+      ],
+      "safety": [
+        "Coins are small. Keep away from mouths and younger children.",
+        "Use a plastic or paper cup, not glass."
+      ],
+      "effect": "A coin disappears from view and seems to travel under a cup.",
+      "steps": [
+        "Before the show, hide a coin under the cup or cover the cup opening with matching paper.",
+        "Place another coin on the table.",
+        "Cover the visible coin with the cup.",
+        "Move the cup in a small circle while telling a story.",
+        "Lift the cup to reveal the surprise position."
+      ],
+      "secret": "Preparation and matching colors guide where the audience looks.",
+      "showTip": "This one is about acting. Look where you want the audience to look.",
+      "questions": {
+        "before": [
+          "Is a grown-up nearby?",
+          "Are coins away from younger kids?",
+          "Does your paper match the table?"
+        ],
+        "during": [
+          "Can you move the cup smoothly?",
+          "Are you looking at the right place?"
+        ],
+        "after": [
+          "Did the audience look surprised?",
+          "Was your setup hidden?",
+          "Try again slower?"
+        ]
+      },
+      "asset": "assets/svg/missions/coin_portal.svg",
+      "badge": "Portal Badge"
+    },
+    {
+      "id": "rising_ring",
+      "number": 10,
+      "title": "The Rising Ring",
+      "subtitle": "Make a ring climb a rubber band.",
+      "ageBands": [
+        "9-12"
+      ],
+      "timeMinutes": 7,
+      "messLevel": "none",
+      "skill": "medium",
+      "needsAdult": false,
+      "items": [
+        "rubber band",
+        "ring or washer"
+      ],
+      "safety": [
+        "Do not snap the rubber band at people.",
+        "Keep small rings away from younger children."
+      ],
+      "effect": "A ring climbs up a slanted rubber band by itself.",
+      "steps": [
+        "Thread the ring onto the rubber band.",
+        "Hold the rubber band so it slopes upward.",
+        "Hide extra slack in the lower hand.",
+        "Slowly release the hidden slack.",
+        "The ring appears to climb upward."
+      ],
+      "secret": "The ring is really sliding along hidden slack as you release it.",
+      "showTip": "Move slowly. Say, 'Climb, little ring,' and keep your lower hand relaxed.",
+      "questions": {
+        "before": [
+          "Do you have a rubber band and ring?",
+          "Can you hold the band without snapping it?"
+        ],
+        "during": [
+          "Did you hide extra slack?",
+          "Can you release the slack slowly?"
+        ],
+        "after": [
+          "Did the ring climb?",
+          "Was it smooth or jumpy?",
+          "Practice with more slack?"
+        ]
+      },
+      "asset": "assets/svg/missions/rising_ring.svg",
+      "badge": "Climb Badge"
+    },
+    {
+      "id": "static_can",
+      "number": 11,
+      "title": "The Can That Follows You",
+      "subtitle": "Move an empty can without touching it.",
+      "ageBands": [
+        "9-12"
+      ],
+      "timeMinutes": 6,
+      "messLevel": "none",
+      "skill": "medium",
+      "needsAdult": true,
+      "items": [
+        "empty aluminum can",
+        "plastic comb or balloon",
+        "dry hair or cloth"
+      ],
+      "safety": [
+        "Use an empty clean can with no sharp edges.",
+        "Do not use a broken or crushed can.",
+        "Balloons are not for younger children."
+      ],
+      "effect": "An empty can rolls toward a comb or balloon without being touched.",
+      "steps": [
+        "Place an empty can on its side on a smooth table or floor.",
+        "Rub a plastic comb on dry hair or cloth.",
+        "Hold the comb near the can without touching it.",
+        "Slowly move the comb away.",
+        "The can follows."
+      ],
+      "secret": "Static electricity pulls lightly on the can.",
+      "showTip": "Act like the comb is a tiny magnet wand, but explain the science secret after the show.",
+      "questions": {
+        "before": [
+          "Is the can clean and safe?",
+          "Is the surface smooth?",
+          "Is a grown-up nearby?"
+        ],
+        "during": [
+          "Did you charge the comb by rubbing it?",
+          "Are you close but not touching?"
+        ],
+        "after": [
+          "Did the can move?",
+          "Was the room dry enough?",
+          "Try a slower move?"
+        ]
+      },
+      "asset": "assets/svg/missions/static_can.svg",
+      "badge": "Static Badge"
+    },
+    {
+      "id": "prediction_star",
+      "number": 12,
+      "title": "Prediction Star",
+      "subtitle": "Predict the answer before the math begins.",
+      "ageBands": [
+        "9-12"
+      ],
+      "timeMinutes": 6,
+      "messLevel": "none",
+      "skill": "medium",
+      "needsAdult": false,
+      "items": [
+        "paper",
+        "pencil"
+      ],
+      "safety": [
+        "No physical risk. Keep pencils away from faces."
+      ],
+      "effect": "You write a prediction first, and the helper's final answer matches it.",
+      "steps": [
+        "Secretly write the number 1 on a paper and fold it.",
+        "Ask a helper to pick any number.",
+        "Tell them: add 4, double it, subtract 6, divide by 2, subtract the starting number.",
+        "Ask for the final answer.",
+        "Open your prediction: 1."
+      ],
+      "secret": "The math cancels their starting number and always leaves 1.",
+      "showTip": "Make the folded prediction feel important. Put it under a cup before the trick starts.",
+      "questions": {
+        "before": [
+          "Did you write the prediction before starting?",
+          "Can your helper do the math?"
+        ],
+        "during": [
+          "Did they add 4?",
+          "Did they double it?",
+          "Did they subtract the starting number at the end?"
+        ],
+        "after": [
+          "Was the final answer 1?",
+          "Want to learn how to make your own math spell?"
+        ]
+      },
+      "asset": "assets/svg/missions/prediction_star.svg",
+      "badge": "Prediction Badge"
+    }
+  ]
+}

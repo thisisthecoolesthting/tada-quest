@@ -1,0 +1,32 @@
+# Flutter / Dart
+app_flutter/.dart_tool/
+app_flutter/.flutter-plugins
+app_flutter/.flutter-plugins-dependencies
+app_flutter/build/
+app_flutter/.pub-cache/
+app_flutter/.pub/
+**/*.g.dart.bak
+
+# Generated native host projects (CI regenerates these)
+app_flutter/android/
+app_flutter/ios/
+app_flutter/web/
+app_flutter/linux/
+app_flutter/macos/
+app_flutter/windows/
+app_flutter/.metadata
+
+# Secrets — never commit
+**/key.properties
+**/*.jks
+**/*.keystore
+**/*service-account*.json
+**/credentials.json
+.env
+*.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

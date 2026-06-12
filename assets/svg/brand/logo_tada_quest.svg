@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img">
+  
+  
+<defs>
+  <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+    <stop stop-color="#6B4EFF"/>
+    <stop offset="1" stop-color="#25C2A0"/>
+  </linearGradient>
+</defs>
+<rect x="36" y="92" width="440" height="328" rx="52" fill="url(#g)"/>
+<circle cx="150" cy="184" r="42" fill="#FFD166"/>
+<path d="M150 121 L163 164 L207 164 L171 190 L184 232 L150 206 L116 232 L129 190 L93 164 L137 164 Z" fill="white" opacity=".95"/>
+<text x="256" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="800" fill="white">Ta‑Da!</text>
+<text x="256" y="318" text-anchor="middle" font-family="Arial, sans-serif" font-size="54" font-weight="800" fill="white">Quest</text>
+<path d="M92 360 C160 392 352 392 420 360" fill="none" stroke="white" stroke-width="14" stroke-linecap="round" opacity=".75"/>
+
+</svg>

@@ -31,6 +31,9 @@ jobs:
       - name: Generate native host project (android/, web/)
         run: flutter create . --platforms=android,web --org com.tadaquest --project-name tada_quest
 
+      - name: Remove stock widget_test.dart (references non-existent MyApp)
+        run: rm -f test/widget_test.dart
+
       - name: Strip ALL permissions from manifest (offline kids app)
         run: |
           MAN=android/app/src/main/AndroidManifest.xml

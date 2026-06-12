@@ -17,9 +17,12 @@ app_flutter/windows/
 app_flutter/.metadata
 
 # Secrets — never commit
+_signing/
 **/key.properties
 **/*.jks
 **/*.keystore
+**/*.b64
+**/keystore-credentials.txt
 **/*service-account*.json
 **/credentials.json
 .env
@@ -30,3 +33,6 @@ app_flutter/.metadata
 Thumbs.db
 .idea/
 .vscode/
+
+# Downloaded CI artifacts (large; live in GitHub Actions, not the repo)
+artifacts/

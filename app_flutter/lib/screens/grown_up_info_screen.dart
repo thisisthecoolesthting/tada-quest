@@ -10,9 +10,10 @@ class GrownUpInfoScreen extends ConsumerWidget {
   const GrownUpInfoScreen({super.key});
 
   // Replace before publishing.
-  static const websiteUrl = 'https://tadaquest.example';
-  static const privacyUrl = 'https://tadaquest.example/privacy';
-  static const contactEmail = 'hello@tadaquest.example';
+  static const websiteUrl = 'https://thisisthecoolesthting.github.io/tada-quest/';
+  static const privacyUrl =
+      'https://thisisthecoolesthting.github.io/tada-quest/privacy.html';
+  static const contactEmail = 'reasner196@gmail.com';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

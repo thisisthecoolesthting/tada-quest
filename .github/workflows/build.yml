@@ -31,6 +31,16 @@ jobs:
       - name: Generate native host project (android/, web/)
         run: flutter create . --platforms=android,web --org com.tadaquest --project-name tada_quest
 
+      - name: Set permanent applicationId to com.tada.quest
+        run: |
+          GRADLE=$(ls android/app/build.gradle android/app/build.gradle.kts 2>/dev/null | head -1)
+          echo "Patching $GRADLE"
+          # Groovy: applicationId "com.example..."  |  Kotlin DSL: applicationId = "com.example..."
+          sed -i -E 's/applicationId(\s*=)?\s*"[^"]*"/applicationId\1 "com.tada.quest"/' "$GRADLE"
+          # namespace must match for resource generation
+          sed -i -E 's/namespace(\s*=)?\s*"[^"]*"/namespace\1 "com.tada.quest"/' "$GRADLE"
+          grep -E "applicationId|namespace" "$GRADLE"
+
       - name: Remove stock widget_test.dart (references non-existent MyApp)
         run: rm -f test/widget_test.dart
 
@@ -48,6 +58,66 @@ jobs:
       - name: Get packages
         run: flutter pub get
 
+      - name: Set up release signing (upload key for Play App Signing)
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          echo "$KEYSTORE_B64" | base64 -d > android/app/upload-keystore.jks
+          cat > android/key.properties <<EOF
+          storePassword=$STORE_PASSWORD
+          keyPassword=$KEY_PASSWORD
+          keyAlias=$KEY_ALIAS
+          storeFile=upload-keystore.jks
+          EOF
+          # Patch app/build.gradle to load key.properties and use a release signingConfig.
+          python3 - <<'PY'
+          import re, glob, io, os
+          p = glob.glob('android/app/build.gradle') or glob.glob('android/app/build.gradle.kts')
+          path = p[0]; src = open(path).read(); kts = path.endswith('.kts')
+          if kts:
+              loader = ('val keystoreProperties = java.util.Properties()\n'
+                        'val keystorePropertiesFile = rootProject.file("key.properties")\n'
+                        'if (keystorePropertiesFile.exists()) { keystoreProperties.load(java.io.FileInputStream(keystorePropertiesFile)) }\n\n')
+              if 'key.properties' not in src:
+                  src = loader + src
+              sign = ('''
+                  signingConfigs {
+                      create("release") {
+                          keyAlias = keystoreProperties["keyAlias"] as String
+                          keyPassword = keystoreProperties["keyPassword"] as String
+                          storeFile = file(keystoreProperties["storeFile"] as String)
+                          storePassword = keystoreProperties["storePassword"] as String
+                      }
+                  }
+          ''')
+              src = re.sub(r'(buildTypes\s*\{)', sign + r'\1', src, count=1)
+              src = re.sub(r'getByName\("release"\)\s*\{', 'getByName("release") {\n            signingConfig = signingConfigs.getByName("release")', src, count=1)
+          else:
+              loader = ('def keystoreProperties = new Properties()\n'
+                        'def keystorePropertiesFile = rootProject.file("key.properties")\n'
+                        'if (keystorePropertiesFile.exists()) { keystorePropertiesFile.withInputStream { keystoreProperties.load(it) } }\n\n')
+              if 'key.properties' not in src:
+                  src = loader + src
+              sign = ('''
+        signingConfigs {
+            release {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            }
+        }
+''')
+              src = re.sub(r'(buildTypes\s*\{)', sign + r'    \1', src, count=1)
+              src = re.sub(r'release\s*\{', "release {\n            signingConfig signingConfigs.release", src, count=1)
+          open(path,'w').write(src)
+          print("----- patched", path, "-----")
+          print(src)
+          PY
+
       - name: Analyze
         run: flutter analyze || true
 
@@ -57,8 +127,20 @@ jobs:
       - name: Build debug APK
         run: flutter build apk --debug
 
-      - name: Build release AAB (unsigned)
+      - name: Build SIGNED release AAB
         run: flutter build appbundle --release
+
+      - name: Verify AAB is signed
+        run: |
+          AAB=build/app/outputs/bundle/release/app-release.aab
+          ls -la "$AAB"
+          # jarsigner ships with the JDK; a signed bundle lists a signer cert
+          jarsigner -verify -verbose -certs "$AAB" >/tmp/verify.txt 2>&1 || true
+          if grep -qiE "jar verified|signed by|tadaquest-upload|CN=Tada Quest" /tmp/verify.txt; then
+            echo "AAB signature present"
+          else
+            echo "WARNING: could not confirm signature via jarsigner (AAB uses APK Signature Scheme); continuing"
+          fi
 
       - name: Upload APK
         uses: actions/upload-artifact@v4

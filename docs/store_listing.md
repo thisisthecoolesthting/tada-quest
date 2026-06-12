@@ -1,7 +1,7 @@
 # Tada Quest — Google Play Store Listing
 
 **App title:** Tada Quest: Home Magic for Kids
-**Package name:** com.tadaquest.app  *(placeholder — verify availability)*
+**Package name:** com.tada.quest  *(permanent once published)*
 **Category:** Education
 **Pricing:** Free · No ads · No in-app purchases
 **Target audience:** 6–8 and 9–12 (ages 4–6 with a grown-up)
@@ -50,4 +50,4 @@ offline kids app, safe magic tricks, creative play
 > art before production launch.
 
 ## Privacy policy URL
-`https://tadaquest.app/privacy.html` (host on the VPS via `deploy/`).
+`https://thisisthecoolesthting.github.io/tada-quest/privacy.html` (live on GitHub Pages).

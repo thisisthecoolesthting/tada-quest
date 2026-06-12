@@ -26,7 +26,7 @@ verified account reasner196@gmail.com).
 - [ ] App is part of the **Designed for Families** / Teacher-approved track? (optional)
 - [ ] Content rating questionnaire (IARC) completed truthfully → expect Everyone
 - [ ] Ads declaration: **No ads**
-- [ ] Privacy policy URL set: `https://tadaquest.app/privacy.html`
+- [ ] Privacy policy URL set: `https://thisisthecoolesthting.github.io/tada-quest/privacy.html`
 
 ## Store listing
 - [ ] Title, short + full description (see `store_listing.md`)

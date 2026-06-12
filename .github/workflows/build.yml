@@ -64,59 +64,7 @@ jobs:
           STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-        run: |
-          echo "$KEYSTORE_B64" | base64 -d > android/app/upload-keystore.jks
-          cat > android/key.properties <<EOF
-          storePassword=$STORE_PASSWORD
-          keyPassword=$KEY_PASSWORD
-          keyAlias=$KEY_ALIAS
-          storeFile=upload-keystore.jks
-          EOF
-          # Patch app/build.gradle to load key.properties and use a release signingConfig.
-          python3 - <<'PY'
-          import re, glob, io, os
-          p = glob.glob('android/app/build.gradle') or glob.glob('android/app/build.gradle.kts')
-          path = p[0]; src = open(path).read(); kts = path.endswith('.kts')
-          if kts:
-              loader = ('val keystoreProperties = java.util.Properties()\n'
-                        'val keystorePropertiesFile = rootProject.file("key.properties")\n'
-                        'if (keystorePropertiesFile.exists()) { keystoreProperties.load(java.io.FileInputStream(keystorePropertiesFile)) }\n\n')
-              if 'key.properties' not in src:
-                  src = loader + src
-              sign = ('''
-                  signingConfigs {
-                      create("release") {
-                          keyAlias = keystoreProperties["keyAlias"] as String
-                          keyPassword = keystoreProperties["keyPassword"] as String
-                          storeFile = file(keystoreProperties["storeFile"] as String)
-                          storePassword = keystoreProperties["storePassword"] as String
-                      }
-                  }
-          ''')
-              src = re.sub(r'(buildTypes\s*\{)', sign + r'\1', src, count=1)
-              src = re.sub(r'getByName\("release"\)\s*\{', 'getByName("release") {\n            signingConfig = signingConfigs.getByName("release")', src, count=1)
-          else:
-              loader = ('def keystoreProperties = new Properties()\n'
-                        'def keystorePropertiesFile = rootProject.file("key.properties")\n'
-                        'if (keystorePropertiesFile.exists()) { keystorePropertiesFile.withInputStream { keystoreProperties.load(it) } }\n\n')
-              if 'key.properties' not in src:
-                  src = loader + src
-              sign = ('''
-        signingConfigs {
-            release {
-                keyAlias keystoreProperties['keyAlias']
-                keyPassword keystoreProperties['keyPassword']
-                storeFile file(keystoreProperties['storeFile'])
-                storePassword keystoreProperties['storePassword']
-            }
-        }
-''')
-              src = re.sub(r'(buildTypes\s*\{)', sign + r'    \1', src, count=1)
-              src = re.sub(r'release\s*\{', "release {\n            signingConfig signingConfigs.release", src, count=1)
-          open(path,'w').write(src)
-          print("----- patched", path, "-----")
-          print(src)
-          PY
+        run: bash ../ci/setup_signing.sh
 
       - name: Analyze
         run: flutter analyze || true

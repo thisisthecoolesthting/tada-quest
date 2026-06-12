@@ -78,16 +78,24 @@ jobs:
       - name: Build SIGNED release AAB
         run: flutter build appbundle --release
 
-      - name: Verify AAB is signed
+      - name: Verify AAB is RELEASE-signed (fail on debug key)
         run: |
           AAB=build/app/outputs/bundle/release/app-release.aab
           ls -la "$AAB"
-          # jarsigner ships with the JDK; a signed bundle lists a signer cert
-          jarsigner -verify -verbose -certs "$AAB" >/tmp/verify.txt 2>&1 || true
-          if grep -qiE "jar verified|signed by|tadaquest-upload|CN=Tada Quest" /tmp/verify.txt; then
-            echo "AAB signature present"
+          keytool -printcert -jarfile "$AAB" > /tmp/cert.txt 2>&1 || true
+          echo "----- signer certificate -----"
+          cat /tmp/cert.txt
+          # The Flutter debug key always has Owner/Issuer CN=Android Debug.
+          if grep -qi "CN=Android Debug" /tmp/cert.txt; then
+            echo "::error::AAB is signed with the DEBUG key. Release signing did not apply."
+            exit 1
+          fi
+          # Positive confirmation: our upload key carries O=Tada Quest / CN=Tada Quest.
+          if grep -qi "Tada Quest" /tmp/cert.txt; then
+            echo "OK: AAB is signed with the Tada Quest upload key."
           else
-            echo "WARNING: could not confirm signature via jarsigner (AAB uses APK Signature Scheme); continuing"
+            echo "::error::Could not confirm the Tada Quest upload key on the AAB."
+            exit 1
           fi
 
       - name: Upload APK

@@ -1,74 +1,95 @@
 #!/usr/bin/env python3
-"""Inject a release signingConfig into the Flutter-generated Android Gradle file.
-Run from app_flutter/. Handles both Groovy (build.gradle) and Kotlin DSL (.kts)."""
+"""Wire a release signingConfig into the Flutter-generated Android Gradle file
+and repoint the release buildType from the debug key to it.
+Handles Kotlin DSL (build.gradle.kts) and Groovy. Fails loudly on problems.
+"""
 import glob
 import re
+import sys
 
-candidates = glob.glob("android/app/build.gradle") + glob.glob(
-    "android/app/build.gradle.kts"
-)
+candidates = glob.glob("android/app/build.gradle.kts")
+candidates += glob.glob("android/app/build.gradle")
 if not candidates:
     raise SystemExit("No android/app/build.gradle[.kts] found")
+
 path = candidates[0]
 kts = path.endswith(".kts")
 src = open(path, encoding="utf-8").read()
+original = src
 
 if kts:
-    loader = (
-        "import java.util.Properties\n"
-        "import java.io.FileInputStream\n\n"
-        "val keystoreProperties = Properties()\n"
-        'val keystorePropertiesFile = rootProject.file("key.properties")\n'
-        "if (keystorePropertiesFile.exists()) "
-        "{ keystoreProperties.load(FileInputStream(keystorePropertiesFile)) }\n\n"
-    )
-    if "key.properties" not in src:
-        src = loader + src
-    sign = (
-        "    signingConfigs {\n"
-        '        create("release") {\n'
-        '            keyAlias = keystoreProperties["keyAlias"] as String\n'
-        '            keyPassword = keystoreProperties["keyPassword"] as String\n'
-        '            storeFile = file(keystoreProperties["storeFile"] as String)\n'
-        '            storePassword = keystoreProperties["storePassword"] as String\n'
-        "        }\n"
-        "    }\n"
-    )
-    src = re.sub(r"(\n\s*buildTypes\s*\{)", "\n" + sign + r"\1", src, count=1)
-    src = re.sub(
-        r'getByName\("release"\)\s*\{',
-        'getByName("release") {\n            '
-        'signingConfig = signingConfigs.getByName("release")',
-        src,
-        count=1,
-    )
+    loader_lines = [
+        "import java.util.Properties",
+        "import java.io.FileInputStream",
+        "",
+        "val keystoreProperties = Properties()",
+        'val keystorePropertiesFile = rootProject.file("key.properties")',
+        "if (keystorePropertiesFile.exists()) {",
+        "    keystoreProperties.load(FileInputStream(keystorePropertiesFile))",
+        "}",
+        "",
+        "",
+    ]
+    sign_lines = [
+        "    signingConfigs {",
+        '        create("release") {',
+        '            keyAlias = keystoreProperties["keyAlias"] as String',
+        '            keyPassword = keystoreProperties["keyPassword"] as String',
+        '            storeFile = file(keystoreProperties["storeFile"] as String)',
+        '            storePassword = keystoreProperties["storePassword"] as String',
+        "        }",
+        "    }",
+        "",
+    ]
+    debug_ref = 'signingConfig = signingConfigs.getByName("debug")'
+    release_ref = 'signingConfig = signingConfigs.getByName("release")'
 else:
-    loader = (
-        "def keystoreProperties = new Properties()\n"
-        'def keystorePropertiesFile = rootProject.file("key.properties")\n'
-        "if (keystorePropertiesFile.exists()) "
-        "{ keystorePropertiesFile.withInputStream { keystoreProperties.load(it) } }\n\n"
-    )
-    if "key.properties" not in src:
-        src = loader + src
-    sign = (
-        "    signingConfigs {\n"
-        "        release {\n"
-        "            keyAlias keystoreProperties['keyAlias']\n"
-        "            keyPassword keystoreProperties['keyPassword']\n"
-        "            storeFile file(keystoreProperties['storeFile'])\n"
-        "            storePassword keystoreProperties['storePassword']\n"
-        "        }\n"
-        "    }\n"
-    )
-    src = re.sub(r"(\n\s*buildTypes\s*\{)", "\n" + sign + r"\1", src, count=1)
-    src = re.sub(
-        r"release\s*\{",
-        "release {\n            signingConfig signingConfigs.release",
-        src,
-        count=1,
-    )
+    loader_lines = [
+        "def keystoreProperties = new Properties()",
+        'def keystorePropertiesFile = rootProject.file("key.properties")',
+        "if (keystorePropertiesFile.exists()) {",
+        "    keystorePropertiesFile.withInputStream { keystoreProperties.load(it) }",
+        "}",
+        "",
+        "",
+    ]
+    sign_lines = [
+        "    signingConfigs {",
+        "        release {",
+        "            keyAlias keystoreProperties['keyAlias']",
+        "            keyPassword keystoreProperties['keyPassword']",
+        "            storeFile file(keystoreProperties['storeFile'])",
+        "            storePassword keystoreProperties['storePassword']",
+        "        }",
+        "    }",
+        "",
+    ]
+    debug_ref = "signingConfig signingConfigs.debug"
+    release_ref = "signingConfig signingConfigs.release"
+
+loader = "\n".join(loader_lines)
+sign_block = "\n".join(sign_lines)
+
+if "keystoreProperties" not in src:
+    src = loader + src
+
+if "signingConfigs {" not in src:
+    src = re.sub(r"(\n[ \t]*buildTypes[ \t]*\{)", "\n" + sign_block + r"\1", src, count=1)
+
+if debug_ref in src:
+    src = src.replace(debug_ref, release_ref, 1)
+elif release_ref not in src:
+    src = re.sub(r"(\n[ \t]*release[ \t]*\{)", r"\1\n            " + release_ref, src, count=1)
+
+if src == original:
+    sys.stderr.write("ERROR: gradle file was not modified\n")
+    sys.exit(1)
 
 open(path, "w", encoding="utf-8").write(src)
-print(f"----- patched {path} -----")
+print("----- patched", path, "-----")
 print(src)
+
+if release_ref not in src:
+    sys.stderr.write("ERROR: release signingConfig not wired\n")
+    sys.exit(1)
+print("OK: release signingConfig wired")
